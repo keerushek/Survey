@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		12C72CB21E4065AE00578026 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CB11E4065AE00578026 /* main.m */; };
 		12C72CB51E4065AE00578026 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CB41E4065AE00578026 /* AppDelegate.m */; };
-		12C72CC11E4065AE00578026 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C72CBF1E4065AE00578026 /* Main.storyboard */; };
 		12C72CC31E4065AE00578026 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12C72CC21E4065AE00578026 /* Assets.xcassets */; };
-		12C72CC61E4065AE00578026 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C72CC41E4065AE00578026 /* LaunchScreen.storyboard */; };
 		12C72CD11E4065AE00578026 /* SurveyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CD01E4065AE00578026 /* SurveyTests.m */; };
 		12C72CDE1E40962A00578026 /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDD1E40962A00578026 /* SurveyViewController.m */; };
 		12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDF1E4099E000578026 /* Model.xcdatamodeld */; };
@@ -34,9 +32,7 @@
 		12C72CB11E4065AE00578026 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		12C72CB31E4065AE00578026 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		12C72CB41E4065AE00578026 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		12C72CC01E4065AE00578026 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12C72CC21E4065AE00578026 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		12C72CC51E4065AE00578026 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12C72CC71E4065AE00578026 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C72CCC1E4065AE00578026 /* SurveyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurveyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C72CD01E4065AE00578026 /* SurveyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SurveyTests.m; sourceTree = "<group>"; };
@@ -44,6 +40,9 @@
 		12C72CDC1E40962A00578026 /* SurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyViewController.h; sourceTree = "<group>"; };
 		12C72CDD1E40962A00578026 /* SurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyViewController.m; sourceTree = "<group>"; };
 		12C72CE01E4099E000578026 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		12C72CE21E40A5E900578026 /* AppCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCommon.h; sourceTree = "<group>"; };
+		12C72CE31E40A63600578026 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		12C72CE41E40A7D300578026 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../Library/Developer/Xcode/DerivedData/Survey-dlnphzuxosiwescvvmndklghcozl/Build/Products/Debug-iphonesimulator/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
 		4C27D9B46839BB27E4BB255A /* libPods-Survey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Survey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FE636339024A65D6AAC03B /* Pods-Survey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey.release.xcconfig"; path = "Pods/Target Support Files/Pods-Survey/Pods-Survey.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,9 +94,7 @@
 				12C72CB41E4065AE00578026 /* AppDelegate.m */,
 				12C72CDC1E40962A00578026 /* SurveyViewController.h */,
 				12C72CDD1E40962A00578026 /* SurveyViewController.m */,
-				12C72CBF1E4065AE00578026 /* Main.storyboard */,
 				12C72CC21E4065AE00578026 /* Assets.xcassets */,
-				12C72CC41E4065AE00578026 /* LaunchScreen.storyboard */,
 				12C72CC71E4065AE00578026 /* Info.plist */,
 				12C72CB01E4065AE00578026 /* Supporting Files */,
 				12C72CDF1E4099E000578026 /* Model.xcdatamodeld */,
@@ -109,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				12C72CB11E4065AE00578026 /* main.m */,
+				12C72CE31E40A63600578026 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -125,6 +123,7 @@
 		12C72CDB1E4095AD00578026 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				12C72CE21E40A5E900578026 /* AppCommon.h */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -141,6 +140,7 @@
 		C0738AD1FFD4BB03C07238B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12C72CE41E40A7D300578026 /* libAFNetworking.a */,
 				4C27D9B46839BB27E4BB255A /* libPods-Survey.a */,
 			);
 			name = Frameworks;
@@ -231,9 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12C72CC61E4065AE00578026 /* LaunchScreen.storyboard in Resources */,
 				12C72CC31E4065AE00578026 /* Assets.xcassets in Resources */,
-				12C72CC11E4065AE00578026 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,25 +321,6 @@
 			targetProxy = 12C72CCD1E4065AE00578026 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		12C72CBF1E4065AE00578026 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12C72CC01E4065AE00578026 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		12C72CC41E4065AE00578026 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				12C72CC51E4065AE00578026 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		12C72CD31E4065AE00578026 /* Debug */ = {
@@ -439,6 +418,7 @@
 			baseConfigurationReference = 112C1851A0C86A4080ABD02A /* Pods-Survey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = Survey/PrefixHeader.pch;
 				INFOPLIST_FILE = Survey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -452,6 +432,7 @@
 			baseConfigurationReference = A7FE636339024A65D6AAC03B /* Pods-Survey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = Survey/PrefixHeader.pch;
 				INFOPLIST_FILE = Survey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

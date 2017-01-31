@@ -8,6 +8,7 @@
 
 #import "SurveyViewController.h"
 
+
 @interface SurveyViewController ()
 
 @end
@@ -28,6 +29,7 @@
 {
     [super loadView];
     [self.view setBackgroundColor:[UIColor blueColor]];
+
 }
 /*
 #pragma mark - Navigation
