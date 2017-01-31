@@ -13,6 +13,10 @@
 		12C72CD11E4065AE00578026 /* SurveyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CD01E4065AE00578026 /* SurveyTests.m */; };
 		12C72CDE1E40962A00578026 /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDD1E40962A00578026 /* SurveyViewController.m */; };
 		12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDF1E4099E000578026 /* Model.xcdatamodeld */; };
+		12C72D011E40DC5A00578026 /* Survey+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CFA1E40DC5A00578026 /* Survey+CoreDataClass.m */; };
+		12C72D021E40DC5A00578026 /* Survey+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CFC1E40DC5A00578026 /* Survey+CoreDataProperties.m */; };
+		12C72D031E40DC5A00578026 /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CFE1E40DC5A00578026 /* User+CoreDataClass.m */; };
+		12C72D041E40DC5A00578026 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72D001E40DC5A00578026 /* User+CoreDataProperties.m */; };
 		B102E33BE2715FED5717BBE3 /* libPods-Survey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C27D9B46839BB27E4BB255A /* libPods-Survey.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +47,14 @@
 		12C72CE21E40A5E900578026 /* AppCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCommon.h; sourceTree = "<group>"; };
 		12C72CE31E40A63600578026 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		12C72CE41E40A7D300578026 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../Library/Developer/Xcode/DerivedData/Survey-dlnphzuxosiwescvvmndklghcozl/Build/Products/Debug-iphonesimulator/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
+		12C72CF91E40DC5A00578026 /* Survey+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataClass.h"; path = "DataModel/Survey+CoreDataClass.h"; sourceTree = "<group>"; };
+		12C72CFA1E40DC5A00578026 /* Survey+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataClass.m"; path = "DataModel/Survey+CoreDataClass.m"; sourceTree = "<group>"; };
+		12C72CFB1E40DC5A00578026 /* Survey+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataProperties.h"; path = "DataModel/Survey+CoreDataProperties.h"; sourceTree = "<group>"; };
+		12C72CFC1E40DC5A00578026 /* Survey+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataProperties.m"; path = "DataModel/Survey+CoreDataProperties.m"; sourceTree = "<group>"; };
+		12C72CFD1E40DC5A00578026 /* User+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+CoreDataClass.h"; path = "DataModel/User+CoreDataClass.h"; sourceTree = "<group>"; };
+		12C72CFE1E40DC5A00578026 /* User+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+CoreDataClass.m"; path = "DataModel/User+CoreDataClass.m"; sourceTree = "<group>"; };
+		12C72CFF1E40DC5A00578026 /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+CoreDataProperties.h"; path = "DataModel/User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		12C72D001E40DC5A00578026 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+CoreDataProperties.m"; path = "DataModel/User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		4C27D9B46839BB27E4BB255A /* libPods-Survey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Survey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FE636339024A65D6AAC03B /* Pods-Survey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey.release.xcconfig"; path = "Pods/Target Support Files/Pods-Survey/Pods-Survey.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +101,7 @@
 		12C72CAF1E4065AE00578026 /* Survey */ = {
 			isa = PBXGroup;
 			children = (
+				12C72CE81E40DA9F00578026 /* DataModel */,
 				12C72CDB1E4095AD00578026 /* Common */,
 				12C72CB31E4065AE00578026 /* AppDelegate.h */,
 				12C72CB41E4065AE00578026 /* AppDelegate.m */,
@@ -126,6 +139,21 @@
 				12C72CE21E40A5E900578026 /* AppCommon.h */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		12C72CE81E40DA9F00578026 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				12C72CF91E40DC5A00578026 /* Survey+CoreDataClass.h */,
+				12C72CFA1E40DC5A00578026 /* Survey+CoreDataClass.m */,
+				12C72CFB1E40DC5A00578026 /* Survey+CoreDataProperties.h */,
+				12C72CFC1E40DC5A00578026 /* Survey+CoreDataProperties.m */,
+				12C72CFD1E40DC5A00578026 /* User+CoreDataClass.h */,
+				12C72CFE1E40DC5A00578026 /* User+CoreDataClass.m */,
+				12C72CFF1E40DC5A00578026 /* User+CoreDataProperties.h */,
+				12C72D001E40DC5A00578026 /* User+CoreDataProperties.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 		9B344D48B3D10099B40AC55E /* Pods */ = {
@@ -198,10 +226,12 @@
 				TargetAttributes = {
 					12C72CAC1E4065AE00578026 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					12C72CCB1E4065AE00578026 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 12C72CAC1E4065AE00578026;
 					};
@@ -300,6 +330,10 @@
 				12C72CDE1E40962A00578026 /* SurveyViewController.m in Sources */,
 				12C72CB51E4065AE00578026 /* AppDelegate.m in Sources */,
 				12C72CB21E4065AE00578026 /* main.m in Sources */,
+				12C72D031E40DC5A00578026 /* User+CoreDataClass.m in Sources */,
+				12C72D021E40DC5A00578026 /* Survey+CoreDataProperties.m in Sources */,
+				12C72D011E40DC5A00578026 /* Survey+CoreDataClass.m in Sources */,
+				12C72D041E40DC5A00578026 /* User+CoreDataProperties.m in Sources */,
 				12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,12 +452,15 @@
 			baseConfigurationReference = 112C1851A0C86A4080ABD02A /* Pods-Survey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREFIX_HEADER = Survey/PrefixHeader.pch;
 				INFOPLIST_FILE = Survey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KSG.Survey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -432,12 +469,14 @@
 			baseConfigurationReference = A7FE636339024A65D6AAC03B /* Pods-Survey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREFIX_HEADER = Survey/PrefixHeader.pch;
 				INFOPLIST_FILE = Survey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KSG.Survey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -449,6 +488,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KSG.SurveyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Survey.app/Survey";
 			};
 			name = Debug;
@@ -461,6 +501,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KSG.SurveyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Survey.app/Survey";
 			};
 			name = Release;
