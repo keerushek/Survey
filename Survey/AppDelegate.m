@@ -7,9 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "SurveyViewController.h"
+
+#define kNotifyChangeMainViewController                    @"NotifyChangeMainViewController"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) UINavigationController *navigation;
 @end
 
 @implementation AppDelegate
@@ -17,7 +20,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    self.navigation = [[UINavigationController alloc]initWithRootViewController:[[SurveyViewController alloc] init]];
+    self.window.rootViewController = self.navigation;
+    
+    [self registerForNotifications];
+    
     return YES;
+}
+
+- (void)registerForNotifications
+{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMainViewControllerTo:) name:kNotifyChangeMainViewController object:nil];
+}
+//Change main view controller
+- (void)changeMainViewControllerTo:(NSNotification *)notification
+{
+    if (notification.object == [SurveyViewController class])
+    {
+        SurveyViewController *ViewController1 = [[SurveyViewController alloc] init];
+        [self.navigation pushViewController:ViewController1 animated:YES];
+    }
+    
+    
 }
 
 
