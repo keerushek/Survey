@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 120E3A731E434ED000545219 /* CommandAccessTokenRefresh.m */; };
 		1277CCC81E431C7F0097C0EC /* CommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1277CCC71E431C7F0097C0EC /* CommandQueue.m */; };
 		1277CCCB1E431DF90097C0EC /* CommandBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1277CCCA1E431DF90097C0EC /* CommandBase.m */; };
 		12C72CB21E4065AE00578026 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CB11E4065AE00578026 /* main.m */; };
@@ -34,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		112C1851A0C86A4080ABD02A /* Pods-Survey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Survey/Pods-Survey.debug.xcconfig"; sourceTree = "<group>"; };
+		120E3A721E434ED000545219 /* CommandAccessTokenRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandAccessTokenRefresh.h; path = CommandQueue/CommandAccessTokenRefresh.h; sourceTree = "<group>"; };
+		120E3A731E434ED000545219 /* CommandAccessTokenRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandAccessTokenRefresh.m; path = CommandQueue/CommandAccessTokenRefresh.m; sourceTree = "<group>"; };
 		1277CCC61E431C7F0097C0EC /* CommandQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandQueue.h; path = CommandQueue/CommandQueue.h; sourceTree = "<group>"; };
 		1277CCC71E431C7F0097C0EC /* CommandQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandQueue.m; path = CommandQueue/CommandQueue.m; sourceTree = "<group>"; };
 		1277CCC91E431DF90097C0EC /* CommandBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandBase.h; path = CommandQueue/CommandBase.h; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 				1277CCC71E431C7F0097C0EC /* CommandQueue.m */,
 				1277CCC91E431DF90097C0EC /* CommandBase.h */,
 				1277CCCA1E431DF90097C0EC /* CommandBase.m */,
+				120E3A721E434ED000545219 /* CommandAccessTokenRefresh.h */,
+				120E3A731E434ED000545219 /* CommandAccessTokenRefresh.m */,
 			);
 			name = CommandQueue;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12F8C1131E4327C200186E23 /* User+CoreDataClass.m in Sources */,
+				120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */,
 				12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */,
 				12F8C1111E43255900186E23 /* User+CoreDataProperties.m in Sources */,
 				1277CCC81E431C7F0097C0EC /* CommandQueue.m in Sources */,

@@ -9,6 +9,7 @@
 #ifndef AppCommon_h
 #define AppCommon_h
 
+#define SERVER_URL_ENDPOINT             @"https://nimbl3-survey-api.herokuapp.com/"
 
 //Notification Identifiers
 #define kNotifyChangeMainViewController                     @"NotifyChangeMainViewController"
