@@ -9,10 +9,17 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "CommonManagedObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface User : NSManagedObject
+@interface User : CommonManagedObject
+
++ (NSArray *)getAllUserAccounts;
++ (NSArray *)getAllUserAccountsInManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (User *)getUserAccountWithEmail:(NSString *)email;
++ (User *)getUserAccountWithEmail:(NSString *)email withManagedObjectContext:(NSManagedObjectContext *)moc;
 
 @end
 

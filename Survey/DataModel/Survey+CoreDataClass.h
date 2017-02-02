@@ -9,10 +9,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "CommonManagedObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Survey : NSManagedObject
+@interface Survey : CommonManagedObject
 
 @end
 
