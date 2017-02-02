@@ -15,5 +15,6 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "AFNetworking.h"
+#import "CommandQueue.h"
 
 #endif /* PrefixHeader_pch */
