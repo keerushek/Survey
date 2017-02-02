@@ -8,12 +8,16 @@
 
 #import "CommandAccessTokenRefresh.h"
 #import "User+CoreDataClass.h"
+
 #define COMMAND_LOGIN_DATA      @"LOGINDATA"
 #define COMMAND_LOGIN_TYPE      @"LOGINTYPE"
 #define REFRESH_GRANT_TYPE      @"grant_type"
 #define REFRESH_LOGIN_USERNAME  @"username"
 #define REFRESH_LOGIN_PASSWORD  @"password"
 #define URL_OAUTH_TOKEN         @"oauth/token"
+#define ACCESS_TOKEN_KEY        @"access_token"
+#define EXPIRES_IN_KEY          @"expires_in"
+#define CREATED_AT_KEY          @"created_at"
 
 @interface CommandAccessTokenRefresh()
 
@@ -124,6 +128,26 @@
 }
 -(void)saveUserDetailsToCoreData
 {
+    self.privateContext = [User privateContext];
     
+    User *user = [User addNewInContext:self.privateContext];
+    
+    
+    user.userName = [self.loginDictionary objectForKey:REFRESH_LOGIN_USERNAME];
+    
+    user.accessToken = [self.responseDictionary objectForKey:ACCESS_TOKEN_KEY];
+    
+    user.createdAt = [[self.responseDictionary objectForKey:CREATED_AT_KEY] longLongValue];
+    
+    user.expiresIn = [[self.responseDictionary objectForKey:EXPIRES_IN_KEY] longLongValue];
+    
+    if([User saveInContext:self.privateContext])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [User save];
+        });
+    }
+    
+
 }
 @end
