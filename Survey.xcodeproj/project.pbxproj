@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 120E3A731E434ED000545219 /* CommandAccessTokenRefresh.m */; };
 		120E3A771E436A4A00545219 /* CommonManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 120E3A761E436A4A00545219 /* CommonManagedObject.m */; };
+		120E3A7A1E43A94200545219 /* RefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 120E3A791E43A94200545219 /* RefreshViewController.m */; };
 		1277CCC81E431C7F0097C0EC /* CommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1277CCC71E431C7F0097C0EC /* CommandQueue.m */; };
 		1277CCCB1E431DF90097C0EC /* CommandBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1277CCCA1E431DF90097C0EC /* CommandBase.m */; };
 		12C72CB21E4065AE00578026 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CB11E4065AE00578026 /* main.m */; };
@@ -40,6 +41,8 @@
 		120E3A731E434ED000545219 /* CommandAccessTokenRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandAccessTokenRefresh.m; path = CommandQueue/CommandAccessTokenRefresh.m; sourceTree = "<group>"; };
 		120E3A751E436A4A00545219 /* CommonManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonManagedObject.h; sourceTree = "<group>"; };
 		120E3A761E436A4A00545219 /* CommonManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonManagedObject.m; sourceTree = "<group>"; };
+		120E3A781E43A94200545219 /* RefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshViewController.h; sourceTree = "<group>"; };
+		120E3A791E43A94200545219 /* RefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshViewController.m; sourceTree = "<group>"; };
 		1277CCC61E431C7F0097C0EC /* CommandQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandQueue.h; path = CommandQueue/CommandQueue.h; sourceTree = "<group>"; };
 		1277CCC71E431C7F0097C0EC /* CommandQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandQueue.m; path = CommandQueue/CommandQueue.m; sourceTree = "<group>"; };
 		1277CCC91E431DF90097C0EC /* CommandBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandBase.h; path = CommandQueue/CommandBase.h; sourceTree = "<group>"; };
@@ -133,10 +136,12 @@
 				12C72CB41E4065AE00578026 /* AppDelegate.m */,
 				12C72CDC1E40962A00578026 /* SurveyViewController.h */,
 				12C72CDD1E40962A00578026 /* SurveyViewController.m */,
+				120E3A781E43A94200545219 /* RefreshViewController.h */,
+				120E3A791E43A94200545219 /* RefreshViewController.m */,
+				12C72CDF1E4099E000578026 /* Model.xcdatamodeld */,
 				12C72CC21E4065AE00578026 /* Assets.xcassets */,
 				12C72CC71E4065AE00578026 /* Info.plist */,
 				12C72CB01E4065AE00578026 /* Supporting Files */,
-				12C72CDF1E4099E000578026 /* Model.xcdatamodeld */,
 			);
 			path = Survey;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				120E3A771E436A4A00545219 /* CommonManagedObject.m in Sources */,
 				120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */,
 				12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */,
+				120E3A7A1E43A94200545219 /* RefreshViewController.m in Sources */,
 				12F8C1111E43255900186E23 /* User+CoreDataProperties.m in Sources */,
 				1277CCC81E431C7F0097C0EC /* CommandQueue.m in Sources */,
 				12C72CDE1E40962A00578026 /* SurveyViewController.m in Sources */,
