@@ -15,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Survey : CommonManagedObject
 
++ (Survey *)getSurveyWithId:(NSString *)surveyId;
++ (Survey *)getSurveyWithId:(NSString *)surveyId withManagedObjectContext:(NSManagedObjectContext *)moc;
+
++ (NSArray *)getAllSurveys;
++ (NSArray *)getAllSurveysWithManagedObjectContext:(NSManagedObjectContext *)moc;
+
 @end
 
 NS_ASSUME_NONNULL_END

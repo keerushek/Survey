@@ -18,7 +18,8 @@
 		12C72CD11E4065AE00578026 /* SurveyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CD01E4065AE00578026 /* SurveyTests.m */; };
 		12C72CDE1E40962A00578026 /* SurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDD1E40962A00578026 /* SurveyViewController.m */; };
 		12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDF1E4099E000578026 /* Model.xcdatamodeld */; };
-		12F8C10F1E43255900186E23 /* Survey+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C1091E43255900186E23 /* Survey+CoreDataProperties.m */; };
+		12F4F14E1E44945C004F6800 /* CommandFetchSurveyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F4F14D1E44945C004F6800 /* CommandFetchSurveyList.m */; };
+		12F4F1511E44A295004F6800 /* Survey+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F4F1501E44A295004F6800 /* Survey+CoreDataProperties.m */; };
 		12F8C1111E43255900186E23 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C10D1E43255900186E23 /* User+CoreDataProperties.m */; };
 		12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C1071E43255900186E23 /* Survey+CoreDataClass.m */; };
 		12F8C1131E4327C200186E23 /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C10B1E43255900186E23 /* User+CoreDataClass.m */; };
@@ -62,10 +63,12 @@
 		12C72CE21E40A5E900578026 /* AppCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCommon.h; sourceTree = "<group>"; };
 		12C72CE31E40A63600578026 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		12C72CE41E40A7D300578026 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../Library/Developer/Xcode/DerivedData/Survey-dlnphzuxosiwescvvmndklghcozl/Build/Products/Debug-iphonesimulator/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
+		12F4F14C1E44945C004F6800 /* CommandFetchSurveyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandFetchSurveyList.h; path = CommandQueue/CommandFetchSurveyList.h; sourceTree = "<group>"; };
+		12F4F14D1E44945C004F6800 /* CommandFetchSurveyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandFetchSurveyList.m; path = CommandQueue/CommandFetchSurveyList.m; sourceTree = "<group>"; };
+		12F4F14F1E44A295004F6800 /* Survey+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataProperties.h"; path = "DataModel/Survey+CoreDataProperties.h"; sourceTree = "<group>"; };
+		12F4F1501E44A295004F6800 /* Survey+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataProperties.m"; path = "DataModel/Survey+CoreDataProperties.m"; sourceTree = "<group>"; };
 		12F8C1061E43255900186E23 /* Survey+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataClass.h"; path = "DataModel/Survey+CoreDataClass.h"; sourceTree = "<group>"; };
 		12F8C1071E43255900186E23 /* Survey+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataClass.m"; path = "DataModel/Survey+CoreDataClass.m"; sourceTree = "<group>"; };
-		12F8C1081E43255900186E23 /* Survey+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataProperties.h"; path = "DataModel/Survey+CoreDataProperties.h"; sourceTree = "<group>"; };
-		12F8C1091E43255900186E23 /* Survey+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataProperties.m"; path = "DataModel/Survey+CoreDataProperties.m"; sourceTree = "<group>"; };
 		12F8C10A1E43255900186E23 /* User+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+CoreDataClass.h"; path = "DataModel/User+CoreDataClass.h"; sourceTree = "<group>"; };
 		12F8C10B1E43255900186E23 /* User+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+CoreDataClass.m"; path = "DataModel/User+CoreDataClass.m"; sourceTree = "<group>"; };
 		12F8C10C1E43255900186E23 /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+CoreDataProperties.h"; path = "DataModel/User+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 				1277CCCA1E431DF90097C0EC /* CommandBase.m */,
 				120E3A721E434ED000545219 /* CommandAccessTokenRefresh.h */,
 				120E3A731E434ED000545219 /* CommandAccessTokenRefresh.m */,
+				12F4F14C1E44945C004F6800 /* CommandFetchSurveyList.h */,
+				12F4F14D1E44945C004F6800 /* CommandFetchSurveyList.m */,
 			);
 			name = CommandQueue;
 			sourceTree = "<group>";
@@ -179,8 +184,8 @@
 			children = (
 				12F8C1061E43255900186E23 /* Survey+CoreDataClass.h */,
 				12F8C1071E43255900186E23 /* Survey+CoreDataClass.m */,
-				12F8C1081E43255900186E23 /* Survey+CoreDataProperties.h */,
-				12F8C1091E43255900186E23 /* Survey+CoreDataProperties.m */,
+				12F4F14F1E44A295004F6800 /* Survey+CoreDataProperties.h */,
+				12F4F1501E44A295004F6800 /* Survey+CoreDataProperties.m */,
 				12F8C10A1E43255900186E23 /* User+CoreDataClass.h */,
 				12F8C10B1E43255900186E23 /* User+CoreDataClass.m */,
 				12F8C10C1E43255900186E23 /* User+CoreDataProperties.h */,
@@ -361,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12F8C1131E4327C200186E23 /* User+CoreDataClass.m in Sources */,
+				12F4F1511E44A295004F6800 /* Survey+CoreDataProperties.m in Sources */,
 				120E3A771E436A4A00545219 /* CommonManagedObject.m in Sources */,
 				120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */,
 				12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */,
@@ -368,11 +374,11 @@
 				12F8C1111E43255900186E23 /* User+CoreDataProperties.m in Sources */,
 				1277CCC81E431C7F0097C0EC /* CommandQueue.m in Sources */,
 				12C72CDE1E40962A00578026 /* SurveyViewController.m in Sources */,
+				12F4F14E1E44945C004F6800 /* CommandFetchSurveyList.m in Sources */,
 				12C72CB51E4065AE00578026 /* AppDelegate.m in Sources */,
 				12C72CB21E4065AE00578026 /* main.m in Sources */,
 				1277CCCB1E431DF90097C0EC /* CommandBase.m in Sources */,
 				12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */,
-				12F8C10F1E43255900186E23 /* Survey+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

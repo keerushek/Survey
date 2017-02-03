@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Survey" representedClassName="Survey" syncable="YES">
         <attribute name="surveyDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="surveyId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="surveyImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="surveyName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -12,7 +13,7 @@
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Survey" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="Survey" positionX="-54" positionY="18" width="128" height="105"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
