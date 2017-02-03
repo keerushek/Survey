@@ -20,6 +20,8 @@
 		12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CDF1E4099E000578026 /* Model.xcdatamodeld */; };
 		12F4F14E1E44945C004F6800 /* CommandFetchSurveyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F4F14D1E44945C004F6800 /* CommandFetchSurveyList.m */; };
 		12F4F1511E44A295004F6800 /* Survey+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F4F1501E44A295004F6800 /* Survey+CoreDataProperties.m */; };
+		12F4F1541E44C257004F6800 /* SurveyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F4F1531E44C257004F6800 /* SurveyView.m */; };
+		12F4F1571E44EDAB004F6800 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F4F1561E44EDAB004F6800 /* ImageCache.m */; };
 		12F8C1111E43255900186E23 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C10D1E43255900186E23 /* User+CoreDataProperties.m */; };
 		12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C1071E43255900186E23 /* Survey+CoreDataClass.m */; };
 		12F8C1131E4327C200186E23 /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F8C10B1E43255900186E23 /* User+CoreDataClass.m */; };
@@ -67,6 +69,10 @@
 		12F4F14D1E44945C004F6800 /* CommandFetchSurveyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandFetchSurveyList.m; path = CommandQueue/CommandFetchSurveyList.m; sourceTree = "<group>"; };
 		12F4F14F1E44A295004F6800 /* Survey+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataProperties.h"; path = "DataModel/Survey+CoreDataProperties.h"; sourceTree = "<group>"; };
 		12F4F1501E44A295004F6800 /* Survey+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataProperties.m"; path = "DataModel/Survey+CoreDataProperties.m"; sourceTree = "<group>"; };
+		12F4F1521E44C257004F6800 /* SurveyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyView.h; sourceTree = "<group>"; };
+		12F4F1531E44C257004F6800 /* SurveyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyView.m; sourceTree = "<group>"; };
+		12F4F1551E44EDAB004F6800 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		12F4F1561E44EDAB004F6800 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		12F8C1061E43255900186E23 /* Survey+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Survey+CoreDataClass.h"; path = "DataModel/Survey+CoreDataClass.h"; sourceTree = "<group>"; };
 		12F8C1071E43255900186E23 /* Survey+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Survey+CoreDataClass.m"; path = "DataModel/Survey+CoreDataClass.m"; sourceTree = "<group>"; };
 		12F8C10A1E43255900186E23 /* User+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+CoreDataClass.h"; path = "DataModel/User+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -141,6 +147,8 @@
 				12C72CB41E4065AE00578026 /* AppDelegate.m */,
 				12C72CDC1E40962A00578026 /* SurveyViewController.h */,
 				12C72CDD1E40962A00578026 /* SurveyViewController.m */,
+				12F4F1521E44C257004F6800 /* SurveyView.h */,
+				12F4F1531E44C257004F6800 /* SurveyView.m */,
 				120E3A781E43A94200545219 /* RefreshViewController.h */,
 				120E3A791E43A94200545219 /* RefreshViewController.m */,
 				12C72CDF1E4099E000578026 /* Model.xcdatamodeld */,
@@ -175,6 +183,8 @@
 				12C72CE21E40A5E900578026 /* AppCommon.h */,
 				120E3A751E436A4A00545219 /* CommonManagedObject.h */,
 				120E3A761E436A4A00545219 /* CommonManagedObject.m */,
+				12F4F1551E44EDAB004F6800 /* ImageCache.h */,
+				12F4F1561E44EDAB004F6800 /* ImageCache.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -368,6 +378,7 @@
 				12F8C1131E4327C200186E23 /* User+CoreDataClass.m in Sources */,
 				12F4F1511E44A295004F6800 /* Survey+CoreDataProperties.m in Sources */,
 				120E3A771E436A4A00545219 /* CommonManagedObject.m in Sources */,
+				12F4F1541E44C257004F6800 /* SurveyView.m in Sources */,
 				120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */,
 				12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */,
 				120E3A7A1E43A94200545219 /* RefreshViewController.m in Sources */,
@@ -378,6 +389,7 @@
 				12C72CB51E4065AE00578026 /* AppDelegate.m in Sources */,
 				12C72CB21E4065AE00578026 /* main.m in Sources */,
 				1277CCCB1E431DF90097C0EC /* CommandBase.m in Sources */,
+				12F4F1571E44EDAB004F6800 /* ImageCache.m in Sources */,
 				12C72CE11E4099E000578026 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

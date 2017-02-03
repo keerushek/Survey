@@ -10,7 +10,6 @@
 #import "CommandAccessTokenRefresh.h"
 #import "SurveyViewController.h"
 
-#define FONT_NAME     @"HelveticaNeue-Light"
 #define BG_IMAGE    @"background"
 
 #define EMAIL_ADDRESS_VALUE     @"Email Id"

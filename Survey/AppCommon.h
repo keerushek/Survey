@@ -17,6 +17,8 @@
 #define kNotifyNetworkAvailabilityChanged                   @"NotifyNetworkAvailabilityChanged"
 
 
+#define FONT_NAME     @"HelveticaNeue-Light"
+
 //CommandQueuePriorities
 #define COMMANDQUEUE_PRIORITY_LOW       0
 #define COMMANDQUEUE_PRIORITY_MED       1
