@@ -11,7 +11,6 @@
 #import "RefreshViewController.h"
 #import "User+CoreDataClass.h"
 
-#define kNotifyChangeMainViewController                    @"NotifyChangeMainViewController"
 
 @interface AppDelegate ()
 
