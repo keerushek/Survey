@@ -8,9 +8,9 @@
 
 #import "AppDelegate.h"
 #import "SurveyViewController.h"
+#import "RefreshViewController.h"
 #import "User+CoreDataClass.h"
 
-#define kNotifyChangeMainViewController                    @"NotifyChangeMainViewController"
 
 @interface AppDelegate ()
 
@@ -44,6 +44,11 @@
         SurveyViewController *ViewController1 = [[SurveyViewController alloc] init];
         self.window.rootViewController = ViewController1;
     }
+    else
+    {
+        RefreshViewController *viewController2 = [[RefreshViewController alloc] init];
+        self.window.rootViewController = viewController2;
+    }
     
     
 }
@@ -60,7 +65,7 @@
     else
     {
         //Login Page
-        self.window.rootViewController = [[SurveyViewController alloc] init];
+        self.window.rootViewController = [[RefreshViewController alloc] init];
         [CommandQueue sharedCommandQueueInstance];
     }
     
