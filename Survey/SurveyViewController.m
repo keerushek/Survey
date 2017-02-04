@@ -13,12 +13,16 @@
 #import "CommandFetchSurveyList.h"
 #import "RefreshViewController.h"
 
+#define SURVEYS_VALUE       @"SURVEYS"
+#define REFRESH_IMAGE_VALUE @"refresh"
+
 
 @interface SurveyViewController ()
-@property (nonatomic, strong) UINavigationBar *navBar;
 @property (nonatomic, strong) SurveyView *surveryView1;
 @property (nonatomic, strong) NSArray *surveyList;
-@property (nonatomic, strong) UIView *fetchingLoadIndicator;
+@property (nonatomic, strong) UIView *fetchingLoadIndicator, *headerView;
+@property (nonatomic, strong) UIButton *refreshSurveyButton;
+@property (nonatomic, strong) UILabel *surveyTitle;
 @end
 
 @implementation SurveyViewController
@@ -36,58 +40,89 @@
 -(void)loadView
 {
     [super loadView];
-    [self.view setBackgroundColor:[UIColor blueColor]];
-//    self.navBar = [[UINavigationBar alloc] init];
+    [self.view setBackgroundColor:[UIColor colorWithRed:22.0/255.0 green:31.0/255.0 blue:63.0/255.0 alpha:1.0]];
+    
+    [self createHeaderView];
+    
+    
     self.surveyList = [Survey getAllSurveys];
     if(self.surveyList == nil || self.surveyList.count <=0)
     {
+        [self refreshSurveyList];
         
-        NSArray *userArray = [User getAllUserAccounts];
-        //Some User Exists
-        if(userArray.count > 0)
-        {
-            User *currentUser = (User *)userArray[0];
-            if(currentUser.accessToken != nil)
-            {
-                [self refreshSurveyListWithAccessToken:currentUser.accessToken];
-            }
-            else
-            {
-                [self switchToRefreshAccessTokenPage];
-            }
-        }
-        else
-        {
-            [self switchToRefreshAccessTokenPage];
-        }
     }
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    self.navBar.frame = CGRectMake(0.0, 20.0, self.view.frame.size.width, 40.0);
-    self.surveryView1.frame = CGRectMake(0.0, self.navBar.frame.origin.y + self.navBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (self.navBar.frame.origin.y + self.navBar.frame.size.height));
+    self.headerView.frame = CGRectMake(0.0, 20.0, self.view.frame.size.width, 40.0);
+    self.refreshSurveyButton.frame = CGRectMake(0.0, 0.0, self.headerView.frame.size.width * 0.1, self.headerView.frame.size.height);
+    self.surveyTitle.frame = CGRectMake(self.headerView.frame.origin.x + self.headerView.frame.size.width, 0.0, self.headerView.frame.size.width - (2 * self.headerView.frame.size.width), self.headerView.frame.size.height);
+    
+    
+    self.surveryView1.frame = CGRectMake(0.0, self.headerView.frame.origin.y + self.headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.origin.y + self.headerView.frame.size.height));
+}
+//Create Header view
+-(void)createHeaderView{
+    self.headerView = [[UIView alloc] init];
+    self.headerView.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.3];
+    
+    self.refreshSurveyButton = [[UIButton alloc] init];
+    [self.refreshSurveyButton setImage:[UIImage imageNamed:REFRESH_IMAGE_VALUE] forState:UIControlStateNormal];
+    self.refreshSurveyButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
+    [self.refreshSurveyButton addTarget:self action:@selector(refreshSurveyList) forControlEvents:UIControlEventTouchDown];
+    [self.headerView addSubview:self.refreshSurveyButton];
+    
+    self.surveyTitle = [[UILabel alloc] init];
+    self.surveyTitle.text = SURVEYS_VALUE;
+    self.surveyTitle.textAlignment = NSTextAlignmentCenter;
+    self.surveyTitle.textColor = [UIColor whiteColor];
+    self.surveyTitle.font = [UIFont fontWithName:FONT_NAME size:23.0];
+    [self.headerView addSubview:self.surveyTitle];
+    
+    [self.view addSubview:self.headerView];
 }
 
--(void)refreshSurveyListWithAccessToken:(NSString *)accessToken {
+//Refresh Survey List
+-(void)refreshSurveyList {
     
-    self.fetchingLoadIndicator = [self getActivityIndictorWithMessage:@"Fetching Survey List" andFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.view addSubview:self.fetchingLoadIndicator];
-    CommandFetchSurveyList *fetchList = [[CommandFetchSurveyList alloc] initWithAccessToken:accessToken CompletionBlock:^(id param){
-        //Removing activity indicator
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.fetchingLoadIndicator removeFromSuperview];
-            self.fetchingLoadIndicator = nil;
-            self.surveyList = [Survey getAllSurveys];
-        });
-
-
-    } errorBlock:^(id param){
+    NSArray *userArray = [User getAllUserAccounts];
+    //Some User Exists
+    if(userArray.count > 0)
+    {
+        User *currentUser = (User *)userArray[0];
+        if(currentUser.accessToken != nil)
+        {
+            self.fetchingLoadIndicator = [self getActivityIndictorWithMessage:@"Fetching Survey List" andFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            [self.view addSubview:self.fetchingLoadIndicator];
+            
+            CommandFetchSurveyList *fetchList = [[CommandFetchSurveyList alloc] initWithAccessToken:currentUser.accessToken CompletionBlock:^(id param){
+                //Removing activity indicator
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.fetchingLoadIndicator removeFromSuperview];
+                    self.fetchingLoadIndicator = nil;
+                    self.surveyList = [Survey getAllSurveys];
+                });
+                
+                
+            } errorBlock:^(id param){
+                [self switchToRefreshAccessTokenPage];
+                
+            }];
+            [[CommandQueue sharedCommandQueueInstance] addClassToCommandQueue:fetchList];
+        }
+        else
+        {
+            [self switchToRefreshAccessTokenPage];
+        }
+    }
+    else
+    {
         [self switchToRefreshAccessTokenPage];
-
-    }];
-    [[CommandQueue sharedCommandQueueInstance] addClassToCommandQueue:fetchList];
+    }
+    
+    
 }
 
 -(void)switchToNextSurvey{
