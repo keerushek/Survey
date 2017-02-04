@@ -130,16 +130,23 @@
 {
     self.privateContext = [User privateContext];
     
-    User *user = [User addNewInContext:self.privateContext];
+    User *userObj = [User getUserAccountWithEmail:[self.loginDictionary objectForKey:REFRESH_LOGIN_USERNAME] withManagedObjectContext:self.privateContext];
+    //Check if user object exists in coredata
+    if(userObj == nil)
+    {
+        userObj = [User addNewInContext:self.privateContext];
+        
+        userObj.userName = [self.loginDictionary objectForKey:REFRESH_LOGIN_USERNAME];
+
+    }
     
     
-    user.userName = [self.loginDictionary objectForKey:REFRESH_LOGIN_USERNAME];
     
-    user.accessToken = [self.responseDictionary objectForKey:ACCESS_TOKEN_KEY];
+    userObj.accessToken = [self.responseDictionary objectForKey:ACCESS_TOKEN_KEY];
     
-    user.createdAt = [[self.responseDictionary objectForKey:CREATED_AT_KEY] longLongValue];
+    userObj.createdAt = [[self.responseDictionary objectForKey:CREATED_AT_KEY] longLongValue];
     
-    user.expiresIn = [[self.responseDictionary objectForKey:EXPIRES_IN_KEY] longLongValue];
+    userObj.expiresIn = [[self.responseDictionary objectForKey:EXPIRES_IN_KEY] longLongValue];
     
     if([User saveInContext:self.privateContext])
     {
