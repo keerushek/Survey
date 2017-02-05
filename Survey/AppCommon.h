@@ -30,6 +30,10 @@
 
 #define BUBBLE_TAG      500
 
+#define SURVEY_TAG      100
+
+#define BUBBLE_HEIGHT   40.0
+
 // Typedefs
 typedef void (^CompletionBlockNoParams)();
 typedef void (^CompletionBlockParam)(id param);

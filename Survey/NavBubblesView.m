@@ -33,7 +33,7 @@
         for(int i=0;i<count;i++)
         {
             UIButton *navBubble = [[UIButton alloc] init];
-            navBubble.frame = CGRectMake(0.0, 40.0*i, self.frame.size.width, 40.0);
+            navBubble.frame = CGRectMake(0.0, BUBBLE_HEIGHT*i, self.frame.size.width, BUBBLE_HEIGHT);
             if(i != selected)
                 [navBubble setImage:[UIImage imageNamed:EMPTY_CIRCLE_IMAGE] forState:UIControlStateNormal];
             else
@@ -64,5 +64,14 @@
 {
     UIButton *bubbleButton = (UIButton *)[self viewWithTag:tag];
     [bubbleButton setImage:[UIImage imageNamed:FULL_CIRCLE_IMAGE] forState:UIControlStateNormal];
+    
+    CGRect intersect = CGRectIntersection(CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height - BUBBLE_HEIGHT), bubbleButton.frame);
+    //Check if the bubble is visible to the user
+    if(CGRectIsNull(intersect))
+    {
+        [self setContentOffset:CGPointMake(0, (tag-BUBBLE_TAG) * BUBBLE_HEIGHT) animated:YES];
+    }
+    
+    
 }
 @end

@@ -115,7 +115,7 @@
         {
             surveyView = [[SurveyView alloc] initWithFrame:CGRectMake(0.0, (self.view.frame.size.height), self.view.frame.size.width, self.view.frame.size.height - 60.0)];
         }
-        surveyView.tag=100+i;
+        surveyView.tag=SURVEY_TAG+i;
         surveyView.takeSurveyDelegate=self;
         [self.view addSubview:surveyView];
         
@@ -158,7 +158,7 @@
 //Remove the views on refresh
 -(void)removeAllSurveyViews
 {
-    for(int i=99;i<100 + self.surveyList.count;i++)
+    for(int i=99;i<SURVEY_TAG + self.surveyList.count;i++)
     {
         UIView *removeView  = [self.view viewWithTag:i];
         if(removeView != nil)
@@ -172,18 +172,18 @@
     
     float navBubblesHeight;
     if(self.surveyList.count > 10)
-        navBubblesHeight = 40.0*10;
+        navBubblesHeight = BUBBLE_HEIGHT*10;
     else
-        navBubblesHeight = 40.0*self.surveyList.count;
+        navBubblesHeight = BUBBLE_HEIGHT*self.surveyList.count;
     
-    self.navBubble = [[NavBubblesView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-40.0, self.navigationController.navigationBar.frame.size.height + 40.0, 40.0, navBubblesHeight) andNumberOfBubbles:(int)self.surveyList.count andSelectedBubble:self.surveyIndex];
+    self.navBubble = [[NavBubblesView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-BUBBLE_HEIGHT, self.navigationController.navigationBar.frame.size.height + BUBBLE_HEIGHT, BUBBLE_HEIGHT, navBubblesHeight) andNumberOfBubbles:(int)self.surveyList.count andSelectedBubble:self.surveyIndex];
     
     
     self.navBubble.navBubbleDelegate = self;
     
     self.navBubble.center = CGPointMake(self.navBubble.center.x, self.view.frame.size.height/2.0);
     
-    self.navBubble.contentSize = CGSizeMake(self.navBubble.frame.size.width, 40.0*self.surveyList.count);
+    self.navBubble.contentSize = CGSizeMake(self.navBubble.frame.size.width, BUBBLE_HEIGHT*self.surveyList.count);
     
     [self.view addSubview:self.navBubble];
 }
@@ -192,7 +192,6 @@
 -(void)refreshSurveyList {
     
     NSArray *userArray = [User getAllUserAccounts];
-    //Some User Exists
     if(userArray.count > 0)
     {
         User *currentUser = (User *)userArray[0];
@@ -200,19 +199,28 @@
         {
             self.fetchingLoadIndicator = [self getActivityIndictorWithMessage:@"Fetching Survey List" andFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
             [self.view addSubview:self.fetchingLoadIndicator];
+            
             //Clear the view list
             [self removeAllSurveyViews];
+            //Clear the navBubble
+            if(self.navBubble != nil)
+            {
+                [self.navBubble deselectBubble:self.surveyIndex + BUBBLE_TAG];
+            }
             
             CommandFetchSurveyList *fetchList = [[CommandFetchSurveyList alloc] initWithAccessToken:currentUser.accessToken CompletionBlock:^(id param){
                 //Removing activity indicator
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.surveyIndex = 0;
+                    
+                        self.surveyIndex = 0;
                     [self.fetchingLoadIndicator removeFromSuperview];
                     self.fetchingLoadIndicator = nil;
                     self.surveyList = [Survey getAllSurveys];
                     [self createListOfSurveyViews];
-                    
-                    [self createBubbleNav];
+                    if(self.navBubble == nil)
+                        [self createBubbleNav];
+                    else
+                        [self.navBubble selectBubble:self.surveyIndex + BUBBLE_TAG];
                 });
                 
                 
@@ -318,7 +326,7 @@
     // On swiping change the position(center) of the mailbyte view and change their tag
     if (recogniser.direction==UISwipeGestureRecognizerDirectionUp)
     {
-        if(currentView.tag-100 !=self.surveyList.count-1)
+        if(currentView.tag-SURVEY_TAG !=self.surveyList.count-1)
         {
             CGPoint nextViewCenter = nextView.center;
             [UIView animateWithDuration:ANIMATION_DUR
@@ -333,11 +341,18 @@
                                  previousView.tag = nextView.tag+1;
                                  previousView.center = nextViewCenter;
                                  
+                                 //Update navBubble
+                                 [self.navBubble deselectBubble:self.surveyIndex + BUBBLE_TAG];
+                                 self.surveyIndex = (int)nextView.tag - SURVEY_TAG;
+                                 [self.navBubble selectBubble:self.surveyIndex + BUBBLE_TAG];
                                  
-                                 if(previousView.tag-100!=self.surveyList.count)
+                                 if(previousView.tag-SURVEY_TAG!=self.surveyList.count)
                                  {
-                                     Survey *survey = (Survey *)[self.surveyList objectAtIndex:previousView.tag-100];
+                                     
+                                     Survey *survey = (Survey *)[self.surveyList objectAtIndex:previousView.tag-SURVEY_TAG];
                                      [previousView renderViewSurveyTitle:survey.surveyName withDescription:survey.surveyDescription andPic:survey.surveyImageUrl];
+                                     
+                                     
                                      
                                      
                                  }
@@ -347,7 +362,7 @@
     }
     else if (recogniser.direction==UISwipeGestureRecognizerDirectionDown )
     {
-        if(currentView.tag!=100)
+        if(currentView.tag!=SURVEY_TAG)
         {
             CGPoint previousViewCenter = previousView.center;
             [UIView animateWithDuration:ANIMATION_DUR
@@ -364,11 +379,19 @@
                                  nextView.tag=previousView.tag-1;
                                  nextView.center=previousViewCenter;
                                  
-                                 if(nextView.tag>=100)
+                                 //Update navBubble
+                                 [self.navBubble deselectBubble:self.surveyIndex + BUBBLE_TAG];
+                                 self.surveyIndex = (int)previousView.tag - SURVEY_TAG;
+                                 [self.navBubble selectBubble:self.surveyIndex + BUBBLE_TAG];
+                                 
+                                 if(nextView.tag>=SURVEY_TAG)
                                  {
-                                     Survey *survey = (Survey *)[self.surveyList objectAtIndex:nextView.tag-100];
+                                     Survey *survey = (Survey *)[self.surveyList objectAtIndex:nextView.tag-SURVEY_TAG];
                                      [nextView renderViewSurveyTitle:survey.surveyName withDescription:survey.surveyDescription andPic:survey.surveyImageUrl];
+                                     
+                                     
                                  }
+                                 
                              }
              ];
         }
@@ -376,6 +399,7 @@
         
     }
 }
+//Change Bubble Select and Deselect and change Survey
 -(void)bubbleTapped:(int)tappedBubbleTag
 {
     [self.navBubble deselectBubble:self.surveyIndex + BUBBLE_TAG];
