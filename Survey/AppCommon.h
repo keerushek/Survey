@@ -28,6 +28,8 @@
 #define COMMANDQUEUE_MAX_OPERATIONS     10
 #define COMMANDQUEUE_RETRY_COUNT        2
 
+#define BUBBLE_TAG      500
+
 // Typedefs
 typedef void (^CompletionBlockNoParams)();
 typedef void (^CompletionBlockParam)(id param);

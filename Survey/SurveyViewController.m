@@ -13,16 +13,18 @@
 #import "CommandFetchSurveyList.h"
 #import "RefreshViewController.h"
 #import "TakeSurveyViewController.h"
+#import "NavBubblesView.h"
 
 #define SURVEYS_VALUE       @"SURVEYS"
 #define REFRESH_IMAGE_VALUE @"refresh"
 #define ANIMATION_DUR 0.3
 
 
-@interface SurveyViewController () <TakeSurveyDelegate, UIGestureRecognizerDelegate>
+@interface SurveyViewController () <TakeSurveyDelegate, NavBubbleDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) NSArray *surveyList;
 @property (nonatomic, strong) UIView *fetchingLoadIndicator;
 @property (nonatomic) int surveyIndex;
+@property (nonatomic, strong) NavBubblesView *navBubble;
 @end
 
 @implementation SurveyViewController
@@ -59,8 +61,10 @@
     else
     {
         [self createListOfSurveyViews];
+        
+        [self createBubbleNav];
     }
-
+    
     
 }
 
@@ -93,54 +97,6 @@
     
 
 }
-
-//Refresh Survey List
--(void)refreshSurveyList {
-    
-    NSArray *userArray = [User getAllUserAccounts];
-    //Some User Exists
-    if(userArray.count > 0)
-    {
-        User *currentUser = (User *)userArray[0];
-        if(currentUser.accessToken != nil)
-        {
-            self.fetchingLoadIndicator = [self getActivityIndictorWithMessage:@"Fetching Survey List" andFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-            [self.view addSubview:self.fetchingLoadIndicator];
-            //Clear the view list
-            [self removeAllSurveyViews];
-            
-            CommandFetchSurveyList *fetchList = [[CommandFetchSurveyList alloc] initWithAccessToken:currentUser.accessToken CompletionBlock:^(id param){
-                //Removing activity indicator
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.surveyIndex = 0;
-                    [self.fetchingLoadIndicator removeFromSuperview];
-                    self.fetchingLoadIndicator = nil;
-                    self.surveyList = [Survey getAllSurveys];
-                    [self createListOfSurveyViews];
-                });
-                
-                
-            } errorBlock:^(id param){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                [self switchToRefreshAccessTokenPage];
-                });
-                
-            }];
-            [[CommandQueue sharedCommandQueueInstance] addClassToCommandQueue:fetchList];
-
-        }
-        else
-        {
-            [self switchToRefreshAccessTokenPage];
-        }
-    }
-    else
-    {
-        [self switchToRefreshAccessTokenPage];
-    }
-    
-    
-}
 //Create List of Survey Views
 -(void)createListOfSurveyViews{
     
@@ -162,6 +118,8 @@
         surveyView.tag=100+i;
         surveyView.takeSurveyDelegate=self;
         [self.view addSubview:surveyView];
+        
+        [self.view sendSubviewToBack:surveyView];
         
         //Up and Down Swipe gestures to navagate from one mailbyte to other
         UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
@@ -195,8 +153,6 @@
             
         }
         
-        
-        
     }
 }
 //Remove the views on refresh
@@ -211,6 +167,77 @@
         }
     }
 }
+//Add Bubble Nav
+-(void)createBubbleNav{
+    
+    float navBubblesHeight;
+    if(self.surveyList.count > 10)
+        navBubblesHeight = 40.0*10;
+    else
+        navBubblesHeight = 40.0*self.surveyList.count;
+    
+    self.navBubble = [[NavBubblesView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-40.0, self.navigationController.navigationBar.frame.size.height + 40.0, 40.0, navBubblesHeight) andNumberOfBubbles:(int)self.surveyList.count andSelectedBubble:self.surveyIndex];
+    
+    
+    self.navBubble.navBubbleDelegate = self;
+    
+    self.navBubble.center = CGPointMake(self.navBubble.center.x, self.view.frame.size.height/2.0);
+    
+    self.navBubble.contentSize = CGSizeMake(self.navBubble.frame.size.width, 40.0*self.surveyList.count);
+    
+    [self.view addSubview:self.navBubble];
+}
+
+//Refresh Survey List
+-(void)refreshSurveyList {
+    
+    NSArray *userArray = [User getAllUserAccounts];
+    //Some User Exists
+    if(userArray.count > 0)
+    {
+        User *currentUser = (User *)userArray[0];
+        if(currentUser.accessToken != nil)
+        {
+            self.fetchingLoadIndicator = [self getActivityIndictorWithMessage:@"Fetching Survey List" andFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            [self.view addSubview:self.fetchingLoadIndicator];
+            //Clear the view list
+            [self removeAllSurveyViews];
+            
+            CommandFetchSurveyList *fetchList = [[CommandFetchSurveyList alloc] initWithAccessToken:currentUser.accessToken CompletionBlock:^(id param){
+                //Removing activity indicator
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.surveyIndex = 0;
+                    [self.fetchingLoadIndicator removeFromSuperview];
+                    self.fetchingLoadIndicator = nil;
+                    self.surveyList = [Survey getAllSurveys];
+                    [self createListOfSurveyViews];
+                    
+                    [self createBubbleNav];
+                });
+                
+                
+            } errorBlock:^(id param){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                [self switchToRefreshAccessTokenPage];
+                });
+                
+            }];
+            [[CommandQueue sharedCommandQueueInstance] addClassToCommandQueue:fetchList];
+
+        }
+        else
+        {
+            [self switchToRefreshAccessTokenPage];
+        }
+    }
+    else
+    {
+        [self switchToRefreshAccessTokenPage];
+    }
+    
+    
+}
+//Switch to RefreshAccess
 -(void)switchToRefreshAccessTokenPage{
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Invalid Access Token" message:@"Login again please" preferredStyle:UIAlertControllerStyleAlert];
@@ -349,5 +376,16 @@
         
     }
 }
-
+-(void)bubbleTapped:(int)tappedBubbleTag
+{
+    [self.navBubble deselectBubble:self.surveyIndex + BUBBLE_TAG];
+ 
+    self.surveyIndex = tappedBubbleTag - BUBBLE_TAG;
+ 
+    [self.navBubble selectBubble:tappedBubbleTag];
+ 
+    [self removeAllSurveyViews];
+    
+    [self createListOfSurveyViews];
+}
 @end

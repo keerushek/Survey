@@ -12,6 +12,7 @@
 		120E3A7A1E43A94200545219 /* RefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 120E3A791E43A94200545219 /* RefreshViewController.m */; };
 		1277CCC81E431C7F0097C0EC /* CommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1277CCC71E431C7F0097C0EC /* CommandQueue.m */; };
 		1277CCCB1E431DF90097C0EC /* CommandBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1277CCCA1E431DF90097C0EC /* CommandBase.m */; };
+		129EDD281E476E2500DAC0BC /* NavBubblesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 129EDD271E476E2500DAC0BC /* NavBubblesView.m */; };
 		12C72CB21E4065AE00578026 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CB11E4065AE00578026 /* main.m */; };
 		12C72CB51E4065AE00578026 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C72CB41E4065AE00578026 /* AppDelegate.m */; };
 		12C72CC31E4065AE00578026 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12C72CC21E4065AE00578026 /* Assets.xcassets */; };
@@ -51,6 +52,8 @@
 		1277CCC71E431C7F0097C0EC /* CommandQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandQueue.m; path = CommandQueue/CommandQueue.m; sourceTree = "<group>"; };
 		1277CCC91E431DF90097C0EC /* CommandBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommandBase.h; path = CommandQueue/CommandBase.h; sourceTree = "<group>"; };
 		1277CCCA1E431DF90097C0EC /* CommandBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommandBase.m; path = CommandQueue/CommandBase.m; sourceTree = "<group>"; };
+		129EDD261E476E2500DAC0BC /* NavBubblesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBubblesView.h; sourceTree = "<group>"; };
+		129EDD271E476E2500DAC0BC /* NavBubblesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBubblesView.m; sourceTree = "<group>"; };
 		12C72CAD1E4065AE00578026 /* Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C72CB11E4065AE00578026 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		12C72CB31E4065AE00578026 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				12C72CDD1E40962A00578026 /* SurveyViewController.m */,
 				12F4F1521E44C257004F6800 /* SurveyView.h */,
 				12F4F1531E44C257004F6800 /* SurveyView.m */,
+				129EDD261E476E2500DAC0BC /* NavBubblesView.h */,
+				129EDD271E476E2500DAC0BC /* NavBubblesView.m */,
 				120E3A781E43A94200545219 /* RefreshViewController.h */,
 				120E3A791E43A94200545219 /* RefreshViewController.m */,
 				12F4F15A1E4756FC004F6800 /* TakeSurveyViewController.h */,
@@ -386,6 +391,7 @@
 				12F4F1541E44C257004F6800 /* SurveyView.m in Sources */,
 				12F4F15C1E4756FC004F6800 /* TakeSurveyViewController.m in Sources */,
 				120E3A741E434ED000545219 /* CommandAccessTokenRefresh.m in Sources */,
+				129EDD281E476E2500DAC0BC /* NavBubblesView.m in Sources */,
 				12F8C1121E4327BE00186E23 /* Survey+CoreDataClass.m in Sources */,
 				120E3A7A1E43A94200545219 /* RefreshViewController.m in Sources */,
 				12F8C1111E43255900186E23 /* User+CoreDataProperties.m in Sources */,

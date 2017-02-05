@@ -41,12 +41,14 @@
         self.surveyTitleLabel = [[UILabel alloc] init];
         self.surveyTitleLabel.font = [UIFont fontWithName:FONT_NAME size:23.0];
         self.surveyTitleLabel.textColor = [UIColor whiteColor];
+        self.surveyTitleLabel.numberOfLines = 2;
         self.surveyTitleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.surveyTitleLabel];
         
         self.surveyDescLabel = [[UILabel alloc] init];
         self.surveyDescLabel.font = [UIFont fontWithName:FONT_NAME size:18.0];
         self.surveyDescLabel.textColor = [UIColor whiteColor];
+        self.surveyDescLabel.numberOfLines = 2;
         self.surveyDescLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.surveyDescLabel];
         
