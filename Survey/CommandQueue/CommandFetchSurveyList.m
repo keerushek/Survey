@@ -95,11 +95,9 @@
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",self.accessToken] forHTTPHeaderField:@"Authorization"];
     
-    
     __block CFRunLoopRef currentThreadref = CFRunLoopGetCurrent();
     CFRunLoopPerformBlock(currentThreadref, kCFRunLoopCommonModes, ^{
         [manager GET:URLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSLog(@"%@",responseObject);
             self.responseArray = [[NSArray alloc] initWithArray:(NSArray *)responseObject];
             CFRunLoopStop(currentThreadref);
         }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)  {

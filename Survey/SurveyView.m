@@ -15,6 +15,7 @@
 @interface SurveyView()
 @property (nonatomic, strong) UILabel *surveyTitleLabel, *surveyDescLabel;
 @property (nonatomic, strong) UIImageView *surveyBGImage;
+@property (nonatomic, strong) UIButton *takeSurveyButton;
 @end
 
 @implementation SurveyView
@@ -26,47 +27,26 @@
     // Drawing code
 }
 */
--(instancetype)initWithSurveyTitle:(NSString *)surveyTitle withDescription:(NSString *)description andPic:(NSString *)imageURL
+-(instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if(self)
     {
         self.surveyBGImage = [[UIImageView alloc] init];
         self.surveyBGImage.contentMode = UIViewContentModeScaleAspectFit;
         self.surveyBGImage.image = [UIImage imageNamed:BG_IMAGE];
-        UIImage *img = (UIImage *)[[ImageCache sharedCache]imageForURLString:imageURL];
-        if(img == nil)
-        {
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-            dispatch_async(queue, ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]]];
-                if(image != nil)
-                {
-                    [[ImageCache sharedCache]addImageToCache:image forURLString:imageURL];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.surveyBGImage.image = image;
-                    });
-                }
-            });
-        }
-        else
-        {
-            self.surveyBGImage.image = img;
-        }
         [self addSubview:self.surveyBGImage];
         
         
         self.surveyTitleLabel = [[UILabel alloc] init];
         self.surveyTitleLabel.font = [UIFont fontWithName:FONT_NAME size:23.0];
         self.surveyTitleLabel.textColor = [UIColor whiteColor];
-        self.surveyTitleLabel.text = surveyTitle;
         self.surveyTitleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.surveyTitleLabel];
         
         self.surveyDescLabel = [[UILabel alloc] init];
         self.surveyDescLabel.font = [UIFont fontWithName:FONT_NAME size:18.0];
         self.surveyDescLabel.textColor = [UIColor whiteColor];
-        self.surveyDescLabel.text = description;
         self.surveyDescLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.surveyDescLabel];
         
@@ -77,6 +57,7 @@
         [self.takeSurveyButton setBackgroundColor:[UIColor redColor]];
         self.takeSurveyButton.layer.cornerRadius = 30;
         self.takeSurveyButton.clipsToBounds = YES;
+        [self.takeSurveyButton addTarget:self action:@selector(takeSurvey) forControlEvents:UIControlEventTouchDown];
         [self addSubview:self.takeSurveyButton];
     }
     return self;
@@ -94,5 +75,40 @@
     
     self.takeSurveyButton.frame = CGRectMake(0.0, self.frame.size.height - self.frame.size.height*0.2, self.frame.size.width * 0.6, self.frame.size.height*0.1);
     self.takeSurveyButton.center = CGPointMake(self.frame.size.width/2.0, self.takeSurveyButton.center.y);
+}
+
+//Delegate to call when take survey is clicked
+-(void)takeSurvey{
+    if([self.takeSurveyDelegate respondsToSelector:@selector(clickTakeSurveyButton)])
+        [self.takeSurveyDelegate clickTakeSurveyButton];
+}
+
+-(void)renderViewSurveyTitle:(NSString *)surveyTitle withDescription:(NSString *)description andPic:(NSString *)imageURL{
+   
+    UIImage *img = (UIImage *)[[ImageCache sharedCache]imageForURLString:imageURL];
+    if(img == nil)
+    {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        dispatch_async(queue, ^{
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]]];
+            if(image != nil)
+            {
+                [[ImageCache sharedCache]addImageToCache:image forURLString:imageURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.surveyBGImage.image = image;
+                });
+            }
+        });
+    }
+    else
+    {
+        self.surveyBGImage.image = img;
+    }
+ 
+    self.surveyTitleLabel.text = surveyTitle;
+    
+    self.surveyDescLabel.text = description;
+    
+    
 }
 @end
