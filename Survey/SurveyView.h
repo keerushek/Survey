@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TakeSurveyDelegate<NSObject>
+
+- (void) clickTakeSurveyButton;
+
+@end
+
 @interface SurveyView : UIView
--(instancetype)initWithSurveyTitle:(NSString *)surveyTitle withDescription:(NSString *)description andPic:(NSString *)imageURL;
-@property (nonatomic, strong) UIButton *takeSurveyButton;
+@property (weak, nonatomic) id<TakeSurveyDelegate> takeSurveyDelegate;
+-(void)renderViewSurveyTitle:(NSString *)surveyTitle withDescription:(NSString *)description andPic:(NSString *)imageURL;
 @end

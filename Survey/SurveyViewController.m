@@ -15,14 +15,16 @@
 
 #define SURVEYS_VALUE       @"SURVEYS"
 #define REFRESH_IMAGE_VALUE @"refresh"
+#define ANIMATION_DUR 0.3
 
 
-@interface SurveyViewController ()
+@interface SurveyViewController () <TakeSurveyDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) SurveyView *surveryView1;
 @property (nonatomic, strong) NSArray *surveyList;
 @property (nonatomic, strong) UIView *fetchingLoadIndicator, *headerView;
 @property (nonatomic, strong) UIButton *refreshSurveyButton;
 @property (nonatomic, strong) UILabel *surveyTitle;
+@property (nonatomic) int surveyIndex;
 @end
 
 @implementation SurveyViewController
@@ -43,7 +45,7 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:22.0/255.0 green:31.0/255.0 blue:63.0/255.0 alpha:1.0]];
     
     [self createHeaderView];
-    
+    self.surveyIndex = 0;
     
     self.surveyList = [Survey getAllSurveys];
     if(self.surveyList == nil || self.surveyList.count <=0)
@@ -51,6 +53,12 @@
         [self refreshSurveyList];
         
     }
+    else
+    {
+        [self createListOfSurveyViews];
+    }
+
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -96,13 +104,17 @@
         {
             self.fetchingLoadIndicator = [self getActivityIndictorWithMessage:@"Fetching Survey List" andFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
             [self.view addSubview:self.fetchingLoadIndicator];
+            //Clear the view list
+            [self removeAllSurveyViews];
             
             CommandFetchSurveyList *fetchList = [[CommandFetchSurveyList alloc] initWithAccessToken:currentUser.accessToken CompletionBlock:^(id param){
                 //Removing activity indicator
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    self.surveyIndex = 0;
                     [self.fetchingLoadIndicator removeFromSuperview];
                     self.fetchingLoadIndicator = nil;
                     self.surveyList = [Survey getAllSurveys];
+                    [self createListOfSurveyViews];
                 });
                 
                 
@@ -124,9 +136,75 @@
     
     
 }
-
--(void)switchToNextSurvey{
+//Create List of Survey Views
+-(void)createListOfSurveyViews{
     
+    for(int i=self.surveyIndex+1;i>=self.surveyIndex-1;i--)
+    {
+        SurveyView *surveyView;
+        if(i==self.surveyIndex-1)
+        {
+            surveyView = [[SurveyView alloc] initWithFrame:CGRectMake(0.0, -(self.view.frame.size.height - 60), self.view.frame.size.width, self.view.frame.size.height - 60.0)];
+        }
+        else if(i==self.surveyIndex)
+        {
+            surveyView = [[SurveyView alloc] initWithFrame:CGRectMake(0.0, 60.0, self.view.frame.size.width, self.view.frame.size.height - 60.0)];
+        }
+        else if(i==self.surveyIndex+1)
+        {
+            surveyView = [[SurveyView alloc] initWithFrame:CGRectMake(0.0, (self.view.frame.size.height), self.view.frame.size.width, self.view.frame.size.height - 60.0)];
+        }
+        surveyView.tag=100+i;
+        surveyView.takeSurveyDelegate=self;
+        [self.view addSubview:surveyView];
+        
+        //Up and Down Swipe gestures to navagate from one mailbyte to other
+        UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+        [swipeDown setDirection:UISwipeGestureRecognizerDirectionDown];
+        [surveyView addGestureRecognizer:swipeDown];
+        
+        
+        UISwipeGestureRecognizer *swipeUP = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+        [swipeUP setDirection:UISwipeGestureRecognizerDirectionUp];
+        [surveyView addGestureRecognizer:swipeUP];
+        
+        
+        // Rendering Survey view
+        Survey *surveyObj;
+        if(i==self.surveyIndex-1 && self.surveyIndex!=0)
+        {
+            surveyObj = (Survey *)[self.surveyList objectAtIndex:self.surveyIndex-1];
+        }
+        if(i==self.surveyIndex)
+        {
+            surveyObj = (Survey *)[self.surveyList objectAtIndex:self.surveyIndex];
+        }
+        if(i==self.surveyIndex+1 && self.surveyIndex!=self.surveyList.count-1)
+        {
+            surveyObj = (Survey *)[self.surveyList objectAtIndex:self.surveyIndex+1];
+        }
+        
+        if(surveyObj!=nil)
+        {
+            [surveyView renderViewSurveyTitle:surveyObj.surveyName withDescription:surveyObj.surveyDescription andPic:surveyObj.surveyImageUrl];
+            
+        }
+        
+        
+        
+    }
+}
+//Remove the views on refresh
+-(void)removeAllSurveyViews
+{
+    for(int i=99;i<100 + self.surveyList.count;i++)
+    {
+        UIView *removeView  = [self.view viewWithTag:i];
+        if(removeView != nil)
+        {
+            [removeView removeFromSuperview];
+        }
+    }
 }
 -(void)switchToRefreshAccessTokenPage{
     
@@ -142,15 +220,14 @@
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+
+
+//Take survey delegate
+-(void)clickTakeSurveyButton{
+    //Navigate to new view and come back
 }
-*/
 //Loading Indicator
 -(UIView *)getActivityIndictorWithMessage:(NSString *)message andFrame:(CGRect)frame
 {
@@ -196,6 +273,75 @@
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^) (void))completion{
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyChangeMainViewController object:[RefreshViewController class]];
 }
-
+//Gesture Handling
+-(void)handleGesture:(UISwipeGestureRecognizer *)recogniser
+{
+    
+    SurveyView *currentView=(SurveyView *)[recogniser view];
+    SurveyView *nextView = (SurveyView *)[self.view viewWithTag:[currentView tag] +1];
+    SurveyView *previousView = (SurveyView *)[self.view viewWithTag:[currentView tag]-1];
+    
+    
+    // On swiping change the position(center) of the mailbyte view and change their tag
+    if (recogniser.direction==UISwipeGestureRecognizerDirectionUp)
+    {
+        if(currentView.tag-100 !=self.surveyList.count-1)
+        {
+            CGPoint nextViewCenter = nextView.center;
+            [UIView animateWithDuration:ANIMATION_DUR
+                                  delay:0
+                                options: UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 nextView.center = currentView.center;
+                                 currentView.center = previousView.center;
+                                 
+                             }
+                             completion:^(BOOL finished){
+                                 previousView.tag = nextView.tag+1;
+                                 previousView.center = nextViewCenter;
+                                 
+                                 
+                                 if(previousView.tag-100!=self.surveyList.count)
+                                 {
+                                     Survey *survey = (Survey *)[self.surveyList objectAtIndex:previousView.tag-100];
+                                     [previousView renderViewSurveyTitle:survey.surveyName withDescription:survey.surveyDescription andPic:survey.surveyImageUrl];
+                                     
+                                     
+                                 }
+                             }
+             ];
+        }
+    }
+    else if (recogniser.direction==UISwipeGestureRecognizerDirectionDown )
+    {
+        if(currentView.tag!=100)
+        {
+            CGPoint previousViewCenter = previousView.center;
+            [UIView animateWithDuration:ANIMATION_DUR
+                                  delay:0
+                                options: UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 
+                                 previousView.center = currentView.center;
+                                 currentView.center=nextView.center;
+                                 
+                             }
+                             completion:^(BOOL finished){
+                                 
+                                 nextView.tag=previousView.tag-1;
+                                 nextView.center=previousViewCenter;
+                                 
+                                 if(nextView.tag>=100)
+                                 {
+                                     Survey *survey = (Survey *)[self.surveyList objectAtIndex:nextView.tag-100];
+                                     [nextView renderViewSurveyTitle:survey.surveyName withDescription:survey.surveyDescription andPic:survey.surveyImageUrl];
+                                 }
+                             }
+             ];
+        }
+        
+        
+    }
+}
 
 @end
