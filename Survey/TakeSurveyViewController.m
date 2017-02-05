@@ -8,6 +8,8 @@
 
 #import "TakeSurveyViewController.h"
 
+#define TAKE_THE_SURVEY     @"TAKE THE SURVEY"
+
 @interface TakeSurveyViewController ()
 
 @end
@@ -20,7 +22,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UILabel *surveyTitle = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, self.navigationController.navigationItem.titleView.frame.size.width, self.navigationController.navigationBar.frame.size.height)];
-    surveyTitle.text = @"TAKE THE SURVEY";
+    surveyTitle.text = TAKE_THE_SURVEY;
     surveyTitle.textAlignment = NSTextAlignmentCenter;
     surveyTitle.textColor = [UIColor whiteColor];
     surveyTitle.font = [UIFont fontWithName:FONT_NAME size:23.0];

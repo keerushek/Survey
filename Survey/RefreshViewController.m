@@ -16,6 +16,7 @@
 #define PASSWORD_VALUE          @"Password"
 #define REFRESH_LOGIN_USERNAME  @"username"
 #define REFRESH_LOGIN_PASSWORD  @"password"
+#define REFRESH_ACCESS_TOKEN    @"Refresh Access Token"
 
 @interface RefreshViewController ()
 @property (nonatomic, strong) UIImageView *backgroundImageView;
@@ -77,7 +78,7 @@
     [self.loginView addSubview:self.passwordTF];
     
     self.loginButton = [[UIButton alloc] init];
-    [self.loginButton setTitle:@"Refresh Access Token" forState:UIControlStateNormal];
+    [self.loginButton setTitle:REFRESH_ACCESS_TOKEN forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.loginButton.titleLabel.font =[UIFont fontWithName:FONT_NAME size:18.0];
     self.loginButton.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
