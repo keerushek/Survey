@@ -12,6 +12,7 @@
 #import "User+CoreDataClass.h"
 #import "CommandFetchSurveyList.h"
 #import "RefreshViewController.h"
+#import "TakeSurveyViewController.h"
 
 #define SURVEYS_VALUE       @"SURVEYS"
 #define REFRESH_IMAGE_VALUE @"refresh"
@@ -19,11 +20,8 @@
 
 
 @interface SurveyViewController () <TakeSurveyDelegate, UIGestureRecognizerDelegate>
-@property (nonatomic, strong) SurveyView *surveryView1;
 @property (nonatomic, strong) NSArray *surveyList;
-@property (nonatomic, strong) UIView *fetchingLoadIndicator, *headerView;
-@property (nonatomic, strong) UIButton *refreshSurveyButton;
-@property (nonatomic, strong) UILabel *surveyTitle;
+@property (nonatomic, strong) UIView *fetchingLoadIndicator;
 @property (nonatomic) int surveyIndex;
 @end
 
@@ -38,6 +36,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 -(void)loadView
 {
@@ -64,32 +67,31 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    self.headerView.frame = CGRectMake(0.0, 20.0, self.view.frame.size.width, 40.0);
-    self.refreshSurveyButton.frame = CGRectMake(0.0, 0.0, self.headerView.frame.size.width * 0.1, self.headerView.frame.size.height);
-    self.surveyTitle.frame = CGRectMake(self.headerView.frame.origin.x + self.headerView.frame.size.width, 0.0, self.headerView.frame.size.width - (2 * self.headerView.frame.size.width), self.headerView.frame.size.height);
-    
-    
-    self.surveryView1.frame = CGRectMake(0.0, self.headerView.frame.origin.y + self.headerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.origin.y + self.headerView.frame.size.height));
 }
 //Create Header view
 -(void)createHeaderView{
-    self.headerView = [[UIView alloc] init];
-    self.headerView.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.3];
     
-    self.refreshSurveyButton = [[UIButton alloc] init];
-    [self.refreshSurveyButton setImage:[UIImage imageNamed:REFRESH_IMAGE_VALUE] forState:UIControlStateNormal];
-    self.refreshSurveyButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
-    [self.refreshSurveyButton addTarget:self action:@selector(refreshSurveyList) forControlEvents:UIControlEventTouchDown];
-    [self.headerView addSubview:self.refreshSurveyButton];
+    UIButton *refreshSurveyButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, self.navigationController.navigationBar.frame.size.width * 0.12, self.navigationController.navigationBar.frame.size.height)];
+    [refreshSurveyButton setImage:[UIImage imageNamed:REFRESH_IMAGE_VALUE] forState:UIControlStateNormal];
+    refreshSurveyButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
+    [refreshSurveyButton addTarget:self action:@selector(refreshSurveyList) forControlEvents:UIControlEventTouchDown];
+
     
-    self.surveyTitle = [[UILabel alloc] init];
-    self.surveyTitle.text = SURVEYS_VALUE;
-    self.surveyTitle.textAlignment = NSTextAlignmentCenter;
-    self.surveyTitle.textColor = [UIColor whiteColor];
-    self.surveyTitle.font = [UIFont fontWithName:FONT_NAME size:23.0];
-    [self.headerView addSubview:self.surveyTitle];
+    UILabel *surveyTitle = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, self.navigationController.navigationItem.titleView.frame.size.width, self.navigationController.navigationBar.frame.size.height)];
+    surveyTitle.text = SURVEYS_VALUE;
+    surveyTitle.textAlignment = NSTextAlignmentCenter;
+    surveyTitle.textColor = [UIColor whiteColor];
+    surveyTitle.font = [UIFont fontWithName:FONT_NAME size:23.0];
+
     
-    [self.view addSubview:self.headerView];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshSurveyButton];
+
+    self.navigationItem.titleView = surveyTitle;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+    self.navigationController.navigationBar.translucent = YES;
+    
+
 }
 
 //Refresh Survey List
@@ -119,10 +121,13 @@
                 
                 
             } errorBlock:^(id param){
+                dispatch_async(dispatch_get_main_queue(), ^{
                 [self switchToRefreshAccessTokenPage];
+                });
                 
             }];
             [[CommandQueue sharedCommandQueueInstance] addClassToCommandQueue:fetchList];
+
         }
         else
         {
@@ -214,7 +219,7 @@
                                   actionWithTitle:@"OK"
                                   style:UIAlertActionStyleDefault
                                   handler:^(UIAlertAction * action) {
-                                      
+                                      [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyChangeMainViewController object:[RefreshViewController class]];
                                   }];
     [alertController addAction:ok];
     [self presentViewController:alertController animated:YES completion:nil];
@@ -227,6 +232,7 @@
 //Take survey delegate
 -(void)clickTakeSurveyButton{
     //Navigate to new view and come back
+    [self.navigationController pushViewController:[[TakeSurveyViewController alloc] init] animated:YES];
 }
 //Loading Indicator
 -(UIView *)getActivityIndictorWithMessage:(NSString *)message andFrame:(CGRect)frame

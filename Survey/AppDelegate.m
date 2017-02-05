@@ -41,13 +41,13 @@
 {
     if (notification.object == [SurveyViewController class])
     {
-        SurveyViewController *ViewController1 = [[SurveyViewController alloc] init];
-        self.window.rootViewController = ViewController1;
+        SurveyViewController *viewController1 = [[SurveyViewController alloc] init];
+        [self.navController setViewControllers:@[viewController1] animated:YES];
     }
-    else
+    else if(notification.object == [RefreshViewController class])
     {
         RefreshViewController *viewController2 = [[RefreshViewController alloc] init];
-        self.window.rootViewController = viewController2;
+        [self.navController setViewControllers:@[viewController2] animated:YES];
     }
     
     
@@ -59,16 +59,18 @@
     if((userAccountArray.count > 0))
     {
         //Survey Page
-        self.window.rootViewController = [[SurveyViewController alloc] init];
+        SurveyViewController *viewController1 = [[SurveyViewController alloc] init];
+        self.navController = [[UINavigationController alloc] initWithRootViewController:viewController1];
         [CommandQueue sharedCommandQueueInstance];
     }
     else
     {
         //Login Page
-        self.window.rootViewController = [[RefreshViewController alloc] init];
+        RefreshViewController *viewController2 = [[RefreshViewController alloc] init];
+        self.navController = [[UINavigationController alloc] initWithRootViewController:viewController2];
         [CommandQueue sharedCommandQueueInstance];
     }
-    
+    self.window.rootViewController = self.navController;
     
 }
 

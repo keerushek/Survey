@@ -36,7 +36,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
 -(void)loadView{
     [super loadView];
     
@@ -74,7 +78,9 @@
     
     self.loginButton = [[UIButton alloc] init];
     [self.loginButton setTitle:@"Refresh Access Token" forState:UIControlStateNormal];
-    self.loginButton.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+    [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.loginButton.titleLabel.font =[UIFont fontWithName:FONT_NAME size:18.0];
+    self.loginButton.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
     [self.loginButton addTarget:self action:@selector(refreshAccessToken) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.loginButton];
 }
@@ -86,7 +92,7 @@
     
     self.backgroundImageView.frame = bounds;
     
-    self.loginView.frame = CGRectMake(0.0, self.view.frame.size.height * 0.4, self.view.frame.size.width, self.view.frame.size.height/8.0);
+    self.loginView.frame = CGRectMake(0.0, self.view.frame.size.height * 0.2, self.view.frame.size.width, self.view.frame.size.height/8.0);
     
     self.emailIdLabel.frame = CGRectMake(0.0, 0.0, self.loginView.frame.size.width/2.5, self.loginView.frame.size.height/2.0);
     
